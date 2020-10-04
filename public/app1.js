@@ -6,7 +6,7 @@ $(document).ready(function(){
     }).then(function(data){
       
         data.forEach(function(data1){
-           var newitem=$(`<li class="task">${data1.name}<span>X</span></li>`);
+           var newitem=$(`<li class="task">${data1.name}<span class="cross">X</span></li>`);
            newitem.data('id',data1._id);
            newitem.data('completed',data1.completed);
            if(data1.completed){
@@ -30,7 +30,7 @@ $("#value").keypress(function(event){
             url:'/api/todos/additem',
             data:{name:itemsval.val()}
             }).then(function(data1){
-                var newitem=$(`<li>${data1.name}</li>`);
+                var newitem=$(`<li class="task">${data1.name} <span class="cross">X</span></li>`);
                 if(data1.completed){
                     newitem.addClass("done");
                     
@@ -44,8 +44,27 @@ $("#value").keypress(function(event){
             })
            
     }
-})}
-)
+})
+$('#items').on('click','li',function(){
+    var id1=$(this).data('id');
+    var updated=$(this).data('completed');
+    
+       $.ajax({
+        method:"PUT",
+        url:"/api/todos/"+id1,
+        data:{completed:!updated}
+    }).then(function(data){
+       $(this).toggleClass("done");
+       $(this).data('completed',!updated);
+       alert("updated");
+    })
+    .catch(function(err){
+        console.log(err);
+    })
+   
+   }
+   )
+})
 //when the page loads span are not present, we are adding them afterwards using jquery therefore we cant simply do $('span').on('click',function(){console.log("hello")})
 //that will not work so we use the ul already present and using that add a span parameter in the on function
 $('#items').on('click','span',function(e){
@@ -61,24 +80,7 @@ $.ajax({
 })
 })
 
-$('#items').on('click','li',function(){
- var id1=$(this).data('id');
- var updated=$(this).data('completed');
- 
-    $.ajax({
-     method:"PUT",
-     url:"/api/todos/"+id1,
-     data:{completed:!updated}
- }).then(function(data){
-    $(this).toggleClass("done");
-    $(this).data('completed',!updated)
- })
- .catch(function(err){
-     console.log(err);
- })
 
-}
-)
 
 // $("#btn").click(function(){
 

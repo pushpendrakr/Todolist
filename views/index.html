@@ -12,9 +12,23 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
  
    <style>
+       h1{
+           text-align:center;
+       }
+       h6{
+           text-align:center;
+       }
        ul{
            display:table;
-           margin:0 auto;
+           margin:0px ;
+           padding:0px;
+           margin-right: 300px;
+           font-size:20px;
+           text-align: right;
+       }
+       ul li{
+        padding:8px 12px 30px;
+        
        }
        .done{
         text-decoration: line-through;   
@@ -23,36 +37,55 @@
            
        }
        li span{
-           float:right;
-           color:red;
-            opacity:0; 
+           
+           float: 200px;          
+          color:red;
+         transition: all 0.3s;
+            /* opacity:0;  */
        }
-      .task:hover span{
+      /* .task:hover span{
           opacity:1;
-      }
+      } */
       .task:hover{
           cursor: pointer;
       }
-      .task{
-          text-align:left;
+    li{
+        text-align:left;
+        margin:100 auto;
+    }
+    .cross{
+        position: absolute;
+        right:520px;
+    }
+      .hello{
+          background-color:beige;
       }
-      
+      .task{
+          widows: 100%;
+      }
+      #value{
+          width:500px;
+          background-color:aliceblue;
+          border:none; /* Get rid of the browser's styling */
+       border-bottom:1px solid black; /* Add your own border */
+      }
+
    </style>
-   <body>
+   <body class="hello">
     
-    <div class='container'>
-        <div align="center">
-        Todos-List</div>       
-    </div>
+       <h1>
+            <u>
+        Todos-List</u></h1>
+     <h6>A small list where you can maintain all you todo works</h6><br>
     <div class="row">
     <div class="col"></div>
    
-    <div class='col-7'>
+    <div class='col-8'>
     <input id="value" placeholder="Add item" type='text'/>
-    <button type="submit"id="btn">submit</button>
+    <br><br>
     </div></div>
     <div id='listitems' align='center'>
-        <ul id="items" align="center">
+        <ul id="items">
             
         </ul>
     </div>
