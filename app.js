@@ -15,6 +15,7 @@ app.get('/',function(req,res){
 })
 app.use('/api/todos',todosroutes);
 app.post('/api/todos',todosroutes);
+app.put('/api/todos',todosroutes);
 app.post('/api/todos/additem',todosroutes);
 app.listen(8080||process.env.PORT,function(){
     console.log("App running");

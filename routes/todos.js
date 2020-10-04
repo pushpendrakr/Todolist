@@ -41,6 +41,7 @@ router.get('/:todoid',function(req,res){
 router.put('/:todoid',function(req,res){
     db.todo.findOneAndUpdate({_id:req.params.todoid},req.body,{new:true})
     .then(function(data){
+        console.log(data);
         res.send(data);
     })
     .catch(function(err){

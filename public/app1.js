@@ -8,6 +8,7 @@ $(document).ready(function(){
         data.forEach(function(data1){
            var newitem=$(`<li class="task">${data1.name}<span>X</span></li>`);
            newitem.data('id',data1._id);
+           newitem.data('completed',data1.completed);
            if(data1.completed){
                newitem.addClass("done");
            }
@@ -45,7 +46,10 @@ $("#value").keypress(function(event){
     }
 })}
 )
-$('#items').on('click','span',function(){
+//when the page loads span are not present, we are adding them afterwards using jquery therefore we cant simply do $('span').on('click',function(){console.log("hello")})
+//that will not work so we use the ul already present and using that add a span parameter in the on function
+$('#items').on('click','span',function(e){
+e.stopPropagation();
 var id1=$(this).parent().data('id');
 $(this).parent().remove();
 $.ajax({
@@ -57,6 +61,24 @@ $.ajax({
 })
 })
 
+$('#items').on('click','li',function(){
+ var id1=$(this).data('id');
+ var updated=$(this).data('completed');
+ 
+    $.ajax({
+     method:"PUT",
+     url:"/api/todos/"+id1,
+     data:{completed:!updated}
+ }).then(function(data){
+    $(this).toggleClass("done");
+    $(this).data('completed',!updated)
+ })
+ .catch(function(err){
+     console.log(err);
+ })
+
+}
+)
 
 // $("#btn").click(function(){
 
